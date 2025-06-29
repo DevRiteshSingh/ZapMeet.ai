@@ -1,11 +1,11 @@
 import { SignUpView } from '@/modules/auth/ui/views/sign-up-view';
 import React from 'react';
 
-const page = () => {
+const Page = () => {
    console.log("sign up page");
   return (
     <SignUpView/>
   );
 }
 
-export default page;
+export default Page;
