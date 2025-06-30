@@ -1,12 +1,14 @@
 "use client";
 import { z } from "zod";
 import Link from "next/link"
-import { use, useState } from "react";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { OctagonAlertIcon } from "lucide-react";
+import { FaGithub, FaGoogle } from "react-icons/fa";
 import { zodResolver } from '@hookform/resolvers/zod';
 
+
 import { useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { authClient } from "@/lib/auth-client";
 import { Button } from "@/components/ui/button";
@@ -14,16 +16,17 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Alert, AlertTitle } from "@/components/ui/alert";
 import { Form, FormControl, FormItem, FormField, FormLabel, FormMessage } from "@/components/ui/form"
 
+
 const fromSchema = z.object({
-    name: z.string().min(1, { message: "Name is required"}),
+    name: z.string().min(1, { message: "Name is required" }),
     email: z.string().email(),
     password: z.string().min(1, { message: "Password is required" }),
     confirmPassword: z.string().min(1, { message: "Password is required" }),
 })
-.refine((data) => data.password === data.confirmPassword,{
-    message: "Passwords don't match",
-    path:["confirmPassword"]
-});
+    .refine((data) => data.password === data.confirmPassword, {
+        message: "Passwords don't match",
+        path: ["confirmPassword"]
+    });
 
 export const SignUpView = () => {
     const router = useRouter();
@@ -35,7 +38,7 @@ export const SignUpView = () => {
             name: "",
             email: "",
             password: "",
-            confirmPassword:"",
+            confirmPassword: "",
         }
     })
 
@@ -47,12 +50,13 @@ export const SignUpView = () => {
             {
                 name: data.name,
                 email: data.email,
-                password: data.password
+                password: data.password,
+                callbackURL: "/",
             },
             {
                 onSuccess: () => {
                     setPending(false);
-                    router.push("/");
+                    router.push("/")
                 },
                 onError: ({ error }) => {
                     setError(error.message)
@@ -60,6 +64,26 @@ export const SignUpView = () => {
             }
         );
     };
+
+    const onSocial = (Provider: "github" | "google") => {
+        setError(null);
+        setPending(true);
+
+        authClient.signIn.social(
+            {
+                provider: Provider,
+                callbackURL: "/",
+            },
+            {
+                onSuccess: () => {
+                    setPending(false);
+                },
+                onError: ({ error }) => {
+                    setError(error.message)
+                }
+            }
+        )
+    }
     return (
         <div className=" felx flex-col gap-6">
             <Card className="overflow-hidden p-0">
@@ -172,20 +196,22 @@ export const SignUpView = () => {
                                 </div>
                                 <div className="grid grid-cols-2 gap-4">
                                     <Button
+                                        onClick={() => { onSocial("google") }}
                                         disabled={pending}
                                         type="button"
                                         variant={"outline"}
                                         className="w-full"
                                     >
-                                        Google
+                                        <FaGoogle />
                                     </Button>
                                     <Button
+                                        onClick={() => { onSocial("github") }}
                                         disabled={pending}
                                         type="button"
                                         variant={"outline"}
                                         className="w-full"
                                     >
-                                        Github
+                                        <FaGithub />
                                     </Button>
                                 </div>
                                 <div className="text-center text-sm">
@@ -207,7 +233,7 @@ export const SignUpView = () => {
             </Card>
             <div className="text-muted-foreground *:[a]:hover:text-primary text-center text-xs p-4
             text-balance *:[a]:underline *:[a]:underline-offset-4">
-                By clicking continue, you agree to ur <a href="#">Terms of Service</a> and <a href="#">Privay Policy</a>
+                By clicking continue, you agree to or <a href="#">Terms of Service</a> and <a href="#">Privay Policy</a>
             </div>
         </div>
     )
