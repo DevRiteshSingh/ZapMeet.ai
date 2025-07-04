@@ -16,7 +16,7 @@ import {
     DrawerDescription,
 } from "@/components/ui/drawer";
 
-interface ResponsiveDailogProps {
+interface ResponsiveDialogProps {
     title: string
     description: string
     open: boolean
@@ -24,13 +24,13 @@ interface ResponsiveDailogProps {
     onOpenChange: (open: boolean) => void;
 };
 
-export const ResponsiveDailogProps = ({
+export const ResponsiveDailog = ({
     title,
     description,
     children,
     open,
     onOpenChange
-}: ResponsiveDailogProps) => {
+}: ResponsiveDialogProps) => {
     const isMobile = useIsMobile();
 
     if (isMobile) {
