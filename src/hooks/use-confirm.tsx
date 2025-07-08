@@ -6,47 +6,47 @@ export const useConfirm = (
     title: string,
     description: string
 ): [() => JSX.Element, () => Promise<unknown>] => {
-    const [promise, sePromise] = useState<{
+    const [promise, setPromise] = useState<{
         resolve: (value: boolean) => void;
     } | null>(null);
 
     const confirm = () => {
         return new Promise((resolve) => {
-            sePromise({ resolve });
+            setPromise({ resolve });
         });
     };
 
-    const handelClose = () => {
-        sePromise(null)
+    const handleClose = () => {
+        setPromise(null)
     };
 
-    const handelConfirm = () => {
+    const handleConfirm = () => {
         promise?.resolve(true);
-        handelClose()
+        handleClose()
     };
 
-    const handelCancel = () => {
+    const handleCancel = () => {
         promise?.resolve(false)
-        handelClose();
+        handleClose();
     }
 
     const ConfirmationDialog = () => (
         <ResponsiveDailog
             open={promise !== null}
-            onOpenChange={handelClose}
+            onOpenChange={handleClose}
             title={title}
             description={description}
         >
             <div className="pt-4 w-full flex flex-col-reverse gap-y-2 lg:flex-row gap-x-2 items-center justify-end">
                 <Button
-                    onClick={handelCancel}
+                    onClick={handleCancel}
                     variant="outline"
                     className="w-full lg:w-auto"
                 >
                     Cancel
                 </Button>
                 <Button
-                    onClick={handelConfirm}
+                    onClick={handleConfirm}
                     className="w-full lg:w-auto"
                 >
                     Confirm
