@@ -1,26 +1,30 @@
 import React from 'react';
 import { ResponsiveDailog } from '@/components/responsive-dailog';
 import { AgentForm } from './agents-form';
+import { AgentGetOne } from '@/modules/agents/types';
 
-interface NewAgentDailogProps {
+interface UpdateAgentDailogProps {
     open: boolean;
     onOpenChange: (open: boolean) => void;
+    initialValues: AgentGetOne
 }
 
-export const NewAgentDialog = ({
+export const UpdateAgentDailog = ({
     open,
-    onOpenChange
-}: NewAgentDailogProps) => {
+    onOpenChange,
+    initialValues
+}: UpdateAgentDailogProps) => {
     return (
         <ResponsiveDailog 
-        title="New Agent"
-        description="Create a new agent"
+        title="Edit Agent"
+        description="Edit the Agent details"
         open={open}
         onOpenChange={onOpenChange}
         >
             <AgentForm 
              onSuccess={() => onOpenChange(false)}
              onCancel={() => onOpenChange(false)}
+             initialValues={initialValues}
              />
         </ResponsiveDailog>
     )
