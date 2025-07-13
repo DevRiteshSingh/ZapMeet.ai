@@ -21,8 +21,8 @@ import { DashboardUserButton } from "./dashboard-user-button"
 const firstSection = [
     {
         icon: VideoIcon,
-        label: "Meeting",
-        href: "/meeting"
+        label: "Meetings",
+        href: "/meetings"
     },
     {
         icon: BotIcon,
