@@ -6,11 +6,11 @@ import {
   AgentsViewError,
   AgentsViewLoading,
   AgentsViews
-} from '@/modules/ui/views/agents-view';
+} from '@/modules/agents/ui/views/agents-view';
 
 import type { SearchParams } from 'nuqs';
 import { getQueryClient, trpc } from '@/trpc/server';
-import { AgentsListHeader } from '@/modules/ui/components/agents-list-header';
+import { AgentsListHeader } from '@/modules/agents/ui/components/agents-list-header';
 import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
