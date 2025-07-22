@@ -21,6 +21,7 @@ import { useState } from "react";
 import { CommandSelect } from "@/components/command-select";
 import { GeneratedAvatar } from "@/components/generated-avatar";
 import { NewAgentDialog } from "@/modules/agents/ui/components/new-agent-dailog";
+import { useRouter } from "next/navigation";
 
 
 interface MeetingsFormProps {
@@ -28,14 +29,14 @@ interface MeetingsFormProps {
     onCancel?: () => void;
     initialValues?: MeetingGetOne
 }
-
+const router = useRouter()
 export const MeetingForm = ({
     onSuccess,
     onCancel,
     initialValues
 }: MeetingsFormProps) => {
     const trpc = useTRPC()
-    const querryClient = useQueryClient()
+    const queryClient = useQueryClient()
 
     const [openNewAgentDailog, setOpenNewAgentDailog] = useState(false)
     const [agentSearch, setAgentSearch] = useState("")
@@ -49,13 +50,20 @@ export const MeetingForm = ({
     const createMeeting = useMutation(
         trpc.meetings.create.mutationOptions({
             onSuccess: async (data) => {
-                await querryClient.invalidateQueries(
+                await queryClient.invalidateQueries(
                     trpc.meetings.getMany.queryOptions({}),
                 );
+                await queryClient.invalidateQueries(
+                    trpc.premimum.getFreeUsage.queryOptions(),
+                );
+
                 onSuccess?.(data.id);
             },
             onError: (error) => {
                 toast.error(error.message)
+                if (error.data?.code === "FORBIDDEN") {
+                    router.push("/upgrade")
+                }
             }
         })
     );
@@ -63,11 +71,11 @@ export const MeetingForm = ({
     const updateMeeting = useMutation(
         trpc.meetings.update.mutationOptions({
             onSuccess: async () => {
-                await querryClient.invalidateQueries(
+                await queryClient.invalidateQueries(
                     trpc.meetings.getMany.queryOptions({}),
                 );
                 if (initialValues?.id) {
-                    await querryClient.invalidateQueries(
+                    await queryClient.invalidateQueries(
                         trpc.meetings.getOne.queryOptions({ id: initialValues.id })
                     );
                 }
@@ -146,7 +154,7 @@ export const MeetingForm = ({
                                     />
                                 </FormControl>
                                 <FormDescription>
-                                     Not found what you&apos;re looking for?{" "}
+                                    Not found what you&apos;re looking for?{" "}
                                     <button
                                         type="button"
                                         className="text-primary hover:underline"

@@ -13,10 +13,10 @@ import {
     SidebarHeader,
     SidebarMenu,
     SidebarMenuButton,
-    SidebarMenuBadge,
     SidebarMenuItem
 } from "@/components/ui/sidebar"
 import { DashboardUserButton } from "./dashboard-user-button"
+import { DashboardTrail } from "./dashboard-trail"
 
 const firstSection = [
     {
@@ -109,6 +109,7 @@ export const DashboardSidebar = () => {
                 </SidebarGroup>
             </SidebarContent>
             <SidebarFooter className="text-white">
+                <DashboardTrail />
                 <DashboardUserButton/>
             </SidebarFooter>
         </Sidebar>
