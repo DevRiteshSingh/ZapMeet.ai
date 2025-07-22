@@ -18,6 +18,7 @@ import {
     FormMessage
 } from "@/components/ui/form";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 
 interface AgentsFormProps {
@@ -25,20 +26,23 @@ interface AgentsFormProps {
     onCancel?: () => void;
     initialValues?: AgentGetOne
 }
-
+const router = useRouter()
 export const AgentForm = ({
     onSuccess,
     onCancel,
     initialValues
 }: AgentsFormProps) => {
     const trpc = useTRPC()
-    const querryClient = useQueryClient()
+    const queryClient = useQueryClient()
 
     const createAgents = useMutation(
         trpc.agents.create.mutationOptions({
             onSuccess: async () => {
-                await querryClient.invalidateQueries(
+                await queryClient.invalidateQueries(
                     trpc.agents.getMany.queryOptions({}),
+                );
+                await queryClient.invalidateQueries(
+                    trpc.premimum.getFreeUsage.queryOptions(),
                 );
                 onSuccess?.();
             },
@@ -51,11 +55,11 @@ export const AgentForm = ({
     const updateAgent = useMutation(
         trpc.agents.update.mutationOptions({
             onSuccess: async () => {
-                await querryClient.invalidateQueries(
+                await queryClient.invalidateQueries(
                     trpc.agents.getMany.queryOptions({}),
                 );
                 if (initialValues?.id) {
-                    await querryClient.invalidateQueries(
+                    await queryClient.invalidateQueries(
                         trpc.agents.getOne.queryOptions({ id: initialValues.id })
                     );
                 }
@@ -63,6 +67,10 @@ export const AgentForm = ({
             },
             onError: (error) => {
                 toast.error(error.message)
+
+                if(error.data?.code === "FORBIDDEN"){
+                    router.push("/upgrade");
+                }
             }
         })
     );
