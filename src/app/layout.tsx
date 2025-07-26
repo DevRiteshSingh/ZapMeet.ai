@@ -1,6 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { Analytics } from '@vercel/analytics/next';
 import { TRPCReactProvider } from "@/trpc/client";
 import { Toaster } from "@/components/ui/sonner";
 import { NuqsAdapter } from "nuqs/adapters/next"
@@ -28,6 +29,7 @@ export default function RootLayout({
           >
             <Toaster />
             {children}
+            <Analytics />
           </body>
         </html>
       </TRPCReactProvider>
