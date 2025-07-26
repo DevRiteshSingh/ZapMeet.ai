@@ -1,14 +1,15 @@
-import React from 'react';
-import { Props } from 'recharts/types/container/Surface';
+import React, { ReactNode } from "react";
 
-const layout = ({ children }: Props) => {
-    return (
-        <div className="bg-muted flex min-h-svh flex-col items-center justify-center p-6 md:p-10">
-            <div className="w-full max-w-sm md:max-w-3xl">
-                {children}
-            </div>
-        </div>
-    );
+interface LayoutProps {
+  children: ReactNode;
 }
 
-export default layout;
+export default function Layout({ children }: LayoutProps) {
+  return (
+    <div className="bg-muted flex min-h-svh flex-col items-center justify-center p-6 md:p-10">
+      <div className="w-full max-w-sm md:max-w-3xl">
+        {children}
+      </div>
+    </div>
+  );
+}
