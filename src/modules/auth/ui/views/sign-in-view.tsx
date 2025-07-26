@@ -187,7 +187,7 @@ export const SignInView = () => {
                             className="h-[92px] w-[92px]"
                         />
                         <p className="text-2xl font-semibold text-white">
-                            Meet.Ai
+                            ZapMeet.ai
                         </p>
                     </div>
                 </CardContent>

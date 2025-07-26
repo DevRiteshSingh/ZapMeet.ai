@@ -14,6 +14,7 @@ import {
 
 export function ModeToggle() {
   const { setTheme } = useTheme()
+  
 
   return (
     <DropdownMenu>
@@ -38,3 +39,7 @@ export function ModeToggle() {
     </DropdownMenu>
   )
 }
+function setMounted(arg0: boolean) {
+    throw new Error("Function not implemented.")
+}
+
