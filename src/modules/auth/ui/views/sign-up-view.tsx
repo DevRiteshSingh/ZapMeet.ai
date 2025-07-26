@@ -15,6 +15,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card"
 import { Alert, AlertTitle } from "@/components/ui/alert";
 import { Form, FormControl, FormItem, FormField, FormLabel, FormMessage } from "@/components/ui/form"
+import Image from "next/image";
 
 
 const fromSchema = z.object({
@@ -224,7 +225,13 @@ export const SignUpView = () => {
                         </form>
                     </Form>
                     <div className="bg-radial from-sidebar-accent to-sidebar relative hidden md:flex flex-col gap-y-4 items-center justify-center">
-                        <img src="logo.svg" alt="Image" className="h-[92px] w-[92px]" />
+                        <Image
+                            src="/logo.svg"
+                            alt="Logo"
+                            width={92}
+                            height={92}
+                            className="h-[92px] w-[92px]"
+                        />
                         <p className="text-2xl font-semibold text-white">
                             Meet.Ai
                         </p>

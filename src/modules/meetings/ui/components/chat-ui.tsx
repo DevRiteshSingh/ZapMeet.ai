@@ -6,7 +6,6 @@ import { useEffect, useState } from "react"
 import {
     Chat,
     Channel,
-    MessageActions,
     Window,
     useCreateChatClient,
     MessageList,

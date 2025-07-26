@@ -80,8 +80,6 @@ export const MeetingIdView = ({ meetingId }: Props) => {
                 />}
                 {isUpcoming && (<UpcomingState
                     meetingId={meetingId}
-                    onCancelMeeting={() => { }}
-                    isCancelling={false}
                 />)}
                 {isCancelled && <CancelledState/>}
                 {isCompleted && <CompletedState data={data}/>}
