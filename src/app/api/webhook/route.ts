@@ -269,7 +269,8 @@ Be concise, helpful, and focus on providing accurate information from the meetin
 
         return NextResponse.json({ status: "ignored event or unknown type" });
 
-    } catch (err) {
+    } catch {
         return NextResponse.json({ error: "Internal server error" }, { status: 500 });
     }
+
 }

@@ -29,7 +29,6 @@ interface MeetingsFormProps {
     onCancel?: () => void;
     initialValues?: MeetingGetOne
 }
-const router = useRouter()
 export const MeetingForm = ({
     onSuccess,
     onCancel,
@@ -37,6 +36,7 @@ export const MeetingForm = ({
 }: MeetingsFormProps) => {
     const trpc = useTRPC()
     const queryClient = useQueryClient()
+    const router = useRouter()
 
     const [openNewAgentDailog, setOpenNewAgentDailog] = useState(false)
     const [agentSearch, setAgentSearch] = useState("")

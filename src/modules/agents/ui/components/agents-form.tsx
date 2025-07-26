@@ -26,7 +26,7 @@ interface AgentsFormProps {
     onCancel?: () => void;
     initialValues?: AgentGetOne
 }
-const router = useRouter()
+
 export const AgentForm = ({
     onSuccess,
     onCancel,
@@ -34,7 +34,7 @@ export const AgentForm = ({
 }: AgentsFormProps) => {
     const trpc = useTRPC()
     const queryClient = useQueryClient()
-
+    const router = useRouter()
     const createAgents = useMutation(
         trpc.agents.create.mutationOptions({
             onSuccess: async () => {
