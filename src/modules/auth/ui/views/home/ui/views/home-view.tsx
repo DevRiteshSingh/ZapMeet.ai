@@ -2,7 +2,7 @@
 
 export const Homeview = () => {
     return (
-        <div>
+        <div className="p-5">
             Home view
         </div>
     );

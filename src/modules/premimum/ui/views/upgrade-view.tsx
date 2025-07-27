@@ -55,7 +55,7 @@ export const UpgradeView = () => {
               product.benefits?.map((benefit) => benefit.description) ?? []
 
             return (
-              <PricingCard
+              <PricingCard 
                 key={product.id}
                 title={product.name}
                 description={product.description}
