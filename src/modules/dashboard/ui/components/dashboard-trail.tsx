@@ -39,7 +39,7 @@ export const DashboardTrail = () => {
                 className="bg-transparent border-t border-border/10 hover:bg-white/10 rounded-t-none"
                 asChild
             >
-                <Link href="/upgrade">
+                <Link className="dark:text-white" href="/upgrade">
                     Upgrade
                 </Link>
             </Button>

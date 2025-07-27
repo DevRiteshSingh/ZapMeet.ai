@@ -89,7 +89,7 @@ export const columns: ColumnDef<MeetingGetMany[number]>[] = [
                 variant="outline"
                 className="capitalize [&>svg]:size-4 text-muted-foreground"
             >
-                <ClockFadingIcon className="text-blue-700" />
+                <ClockFadingIcon className="text-blue-700 dark:text-blue-500" />
                 {row.original.duration ? formatDuration(row.original.duration) : "No duration"}
             </Badge>
         ),
