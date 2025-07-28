@@ -23,11 +23,11 @@ const statusIconMap = {
     cancelled: CircleXIcon
 };
 const statusColorMap = {
-    upcoming: "bg-yellow-500/20 text-yellow-800 border-yellow-800/5",
-    active: "bg-blue-500/20 text-blue-800 border-blue-800/5",
-    completed: "bg-emerald-500/20 text-emerald-800 border-emerald-800/5",
+    upcoming: "bg-yellow-500/20 text-yellow-800 border-yellow-800/5 dark:text-yellow-600",
+    active: "bg-blue-500/20 text-blue-800 border-blue-800/5 dark:text-blue-600",
+    completed: "bg-emerald-500/20 text-emerald-800 border-emerald-800/5 dark:text-green-600",
     cancelled: "bg-rose-500/20 text-rose-800 border-rose-800/5",
-    processing: "bg-gray-500/20 text-gray-800 border-gray/5",
+    processing: "bg-gray-500/20 text-gray-800 border-gray/5 dark:text-gray-400",
 }
 
 
