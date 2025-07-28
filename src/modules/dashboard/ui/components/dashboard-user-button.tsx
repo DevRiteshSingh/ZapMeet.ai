@@ -77,14 +77,14 @@ export const DashboardUserButton = () => {
                             variant="outline"
                             onClick={() => authClient.customer.portal()}
                         >
-                            <CreditCardIcon className="size-4 text-black" />
+                            <CreditCardIcon className="size-4 text-black dark:text-white" />
                             Billing
                         </Button>
                         <Button
                             variant="outline"
                             onClick={onLogout}
                         >
-                            <LogOutIcon className="size-4 text-black" />
+                            <LogOutIcon className="size-4 text-black dark:text-white" />
                             Logout
                         </Button>
                     </DrawerFooter>

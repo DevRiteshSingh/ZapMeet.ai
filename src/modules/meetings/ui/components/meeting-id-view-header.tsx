@@ -59,11 +59,11 @@ export const MeetingIdViewHeader = ({
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
                     <DropdownMenuItem onClick={onEdit}>
-                        <PencilIcon className="size-4 text-black"/>
+                        <PencilIcon className="size-4 text-black dark:text-white"/>
                         Edit
                     </DropdownMenuItem>
                     <DropdownMenuItem onClick={onRemove}>
-                        <TrashIcon className="size-4 text-black"/>
+                        <TrashIcon className="size-4 text-black dark:text-white"/>
                         Delete
                     </DropdownMenuItem>
                 </DropdownMenuContent>
